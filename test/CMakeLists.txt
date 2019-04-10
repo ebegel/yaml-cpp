@@ -17,12 +17,6 @@ ExternalProject_Add(
 		-Dgtest_force_shared_crt=ON
 )
 
-add_library(gmock UNKNOWN IMPORTED)
-set_target_properties(gmock PROPERTIES
-    IMPORTED_LOCATION
-    ${PROJECT_BINARY_DIR}/test/prefix/lib/${CMAKE_STATIC_LIBRARY_PREFIX}gmock${CMAKE_STATIC_LIBRARY_SUFFIX}
-)
-
 find_package(Threads)
 
 include_directories(SYSTEM "${PROJECT_BINARY_DIR}/test/prefix/include")
@@ -58,7 +52,6 @@ set_target_properties(run-tests PROPERTIES
 )
 target_link_libraries(run-tests
     yaml-cpp
-    gmock
     ${CMAKE_THREAD_LIBS_INIT})
 
 add_test(yaml-test ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/run-tests)
